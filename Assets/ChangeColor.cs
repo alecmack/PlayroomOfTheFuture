@@ -16,8 +16,6 @@ public class ChangeColor : NetworkBehaviour
 
 
 
-
-
     SpriteRenderer button1Renderer;
     SpriteRenderer otherButton;
 
