@@ -6,7 +6,7 @@ using Unity.Netcode;
 public class disableEnable : NetworkBehaviour
 {
     public GameObject objectBeingActivated;
-    private int soClose = 0;
+    private bool deactivated = false;
 
 
     // Start is called before the first frame update
@@ -18,12 +18,12 @@ public class disableEnable : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (IsHost && soClose == 0)
+        if (IsHost && !deactivated)
         {
             Debug.Log("setting camera 1 to false");
 
             objectBeingActivated.SetActive(false);
-            soClose++;
+            deactivated = true;
         }
 
     }

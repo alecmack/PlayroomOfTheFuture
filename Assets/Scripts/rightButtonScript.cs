@@ -6,18 +6,17 @@ using Unity.Netcode;
 // using this as connected host for testing purposes
 
 
-public class ChangeColor : NetworkBehaviour
+public class rightButtonScript : NetworkBehaviour
 {
     //public GameObject cameraHolder;
 
-    [SerializeField] public GameObject iteractWith;
-
-    public NetworkVariable<Color> leftColor = new NetworkVariable<Color>(Color.green, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    //[SerializeField] public GameObject iteractWith;
 
 
+    public EventManager eventManager;
 
     SpriteRenderer button1Renderer;
-    SpriteRenderer otherButton;
+    //SpriteRenderer otherButton;
 
 
     public void Update()
@@ -37,12 +36,16 @@ public class ChangeColor : NetworkBehaviour
     {
         Debug.Log("Button 2 clicked!");
 
- 
+        eventManager.rightButtonClicked();
 
-        changeOtherColorClientRpc();
+        //eventManager.changeOtherColorClientRpc();
+
+        // EventManager.changeOtherColorClientRpc();
+
+        // MUST BE A NON STATIC CALL , NEED AN OBJECT ??
     }
 
-
+    /*
     [ClientRpc]
     private void changeOtherColorClientRpc()
     {
@@ -53,6 +56,6 @@ public class ChangeColor : NetworkBehaviour
         button1Renderer.color = Color.red;
     }
 
-
+    */
 
 }
