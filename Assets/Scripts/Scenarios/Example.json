@@ -1,0 +1,45 @@
+{
+	"steps": [
+		{
+			"type": "Initialization",
+			"deviceCount": 3
+		},
+		{
+			"type": "Cutscene",
+			"devices": [
+				{
+					"asset": "Lion",
+					"initialText": "The lion, monkey and turtle had a race. The lion and monkey ran very fast. The turtle ran very slow. Go to the turtle and encourage it by clapping."
+				},
+				{
+					"asset": "Monkey",
+					"initialText": "The lion, monkey and turtle had a race. The lion and monkey ran very fast. The turtle ran very slow. Go to the turtle and encourage it by clapping."
+				},
+				{
+					"asset": "Turtle",
+					"initialText": "The lion, monkey and turtle had a race. The lion and monkey ran very fast. The turtle ran very slow. Go to the turtle and encourage it by clapping."
+				}
+			]
+		},
+		{
+			"type": "ClapActivity",
+			"correctInput": 2,
+			"devices": [
+				{
+					"asset": "Lion",
+					"initialText": "Lion: Go to the turtle and encourage it by clapping.",
+					"incorrectText": "Lion: Try again! Go to the turtle and encourage it by clapping."
+				},
+				{
+					"asset": "Monkey",
+					"initialText": "Monkey: Go to the turtle and encourage it by clapping.",
+					"incorrectText": "Monkey: Try again! Go to the turtle and encourage it by clapping."
+				},
+				{
+					"asset": "Turtle",
+					"initialText": "Turtle: I run very slow. I need you to clap for me to run."
+				}
+			]
+		}
+	]
+}
