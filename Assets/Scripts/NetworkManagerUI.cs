@@ -10,11 +10,19 @@ using TMPro;
 using System.Net.Sockets;
 
 
-public class NetworkManagerUI : MonoBehaviour
+public class NetworkManagerUI : NetworkBehaviour
 {
     [SerializeField] private Button serverBtn;
     [SerializeField] private Button hostBtn;
     [SerializeField] private Button clientBtn;
+    public GameObject TurtleCamera;
+    public GameObject LionCamera;
+    public GameObject MonkeyCamera;
+
+    private NetworkVariable<int> numClients = new NetworkVariable<int>();
+
+    private const int initial = 1;
+
 
 
     [SerializeField] TextMeshProUGUI ipAddressText;
@@ -25,6 +33,8 @@ public class NetworkManagerUI : MonoBehaviour
 
     private void Awake()
     {
+
+        numClients.Value = initial;
         serverBtn.onClick.AddListener(() =>
         {
             NetworkManager.Singleton.StartServer(); 
@@ -34,6 +44,10 @@ public class NetworkManagerUI : MonoBehaviour
         {
             NetworkManager.Singleton.StartHost();
             GetLocalIPAddress();
+           
+            TurtleCamera.SetActive(false);
+            MonkeyCamera.SetActive(false);
+            Debug.Log("Host started");
         });
 
         clientBtn.onClick.AddListener(() =>
@@ -41,6 +55,20 @@ public class NetworkManagerUI : MonoBehaviour
             ipAddress = ip.text;
             SetIpAddress();
             NetworkManager.Singleton.StartClient();
+            if(numClients.Value == 1)
+            {
+                LionCamera.SetActive(false);
+                MonkeyCamera.SetActive(false);
+                numClients.Value++;
+            }
+
+            if(numClients.Value == 2)
+            {
+                LionCamera.SetActive(false);
+                TurtleCamera.SetActive(false);
+                numClients.Value++;
+            }
+
         });
     }
 
