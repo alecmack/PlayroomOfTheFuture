@@ -34,7 +34,7 @@ public class NetworkManagerUI : NetworkBehaviour
     private void Awake()
     {
 
-        numClients.Value = initial;
+        
         serverBtn.onClick.AddListener(() =>
         {
             NetworkManager.Singleton.StartServer(); 
@@ -48,6 +48,7 @@ public class NetworkManagerUI : NetworkBehaviour
             TurtleCamera.SetActive(false);
             MonkeyCamera.SetActive(false);
             Debug.Log("Host started");
+            numClients.Value = initial;
         });
 
         clientBtn.onClick.AddListener(() =>
