@@ -29,7 +29,7 @@ public class rightButtonScript : NetworkBehaviour
 
 
         button1Renderer = GetComponent<SpriteRenderer>();
-        button1Renderer.color = Color.red;
+       // button1Renderer.color = Color.red;
 
     }
     private void OnMouseDown()

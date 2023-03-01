@@ -697,10 +697,17 @@ MonoBehaviour:
   serverBtn: {fileID: 1538787904}
   hostBtn: {fileID: 1371309016}
   clientBtn: {fileID: 1801298887}
+  TurtleCamera: {fileID: 0}
+  LionCamera: {fileID: 0}
+  MonkeyCamera: {fileID: 0}
+  numClients:
+    m_InternalValue: 0
+  EventManager: {fileID: 0}
   ipAddressText: {fileID: 257289813}
   ip: {fileID: 1320989516}
   ipAddress: 
   transport: {fileID: 0}
+  numClientsGUI: {fileID: 0}
 --- !u!1 &685840199
 GameObject:
   m_ObjectHideFlags: 0
@@ -1867,6 +1874,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftButton: {fileID: 1827920335}
   rightButton: {fileID: 543043665}
+  numberOfClients: {fileID: 0}
+  NetworkManagerUI: {fileID: 559283274}
 --- !u!114 &1785907403
 MonoBehaviour:
   m_ObjectHideFlags: 0

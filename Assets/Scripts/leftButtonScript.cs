@@ -28,7 +28,7 @@ public class leftButtonScript : NetworkBehaviour
     {
 
         button1Renderer = GetComponent<SpriteRenderer>();
-        button1Renderer.color = Color.green;
+        //button1Renderer.color = Color.green;
 
 
     }

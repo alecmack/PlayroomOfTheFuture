@@ -12,16 +12,23 @@ using System.Net.Sockets;
 
 public class NetworkManagerUI : NetworkBehaviour
 {
-    [SerializeField] private Button serverBtn;
     [SerializeField] private Button hostBtn;
     [SerializeField] private Button clientBtn;
+
+    [SerializeField] private GameObject networkButtons;
+
+
     public GameObject TurtleCamera;
     public GameObject LionCamera;
     public GameObject MonkeyCamera;
 
-    private NetworkVariable<int> numClients = new NetworkVariable<int>();
+    public GameObject MainCamera;
+
+    public NetworkVariable<int> numClients = new NetworkVariable<int>();
 
     private const int initial = 1;
+
+    public EventManager EventManager;
 
 
 
@@ -30,48 +37,125 @@ public class NetworkManagerUI : NetworkBehaviour
 
     [SerializeField] string ipAddress;
     [SerializeField] UnityTransport transport;
+   // [SerializeField] string numClientsString;
+    [SerializeField] TextMeshProUGUI numClientsGUI;
+
+    public int getNumClients()
+    {
+        return numClients.Value;
+    }
+
 
     private void Awake()
     {
+        MainCamera.SetActive(true);
+        TurtleCamera.SetActive(false);
+        LionCamera.SetActive(false);
+        MonkeyCamera.SetActive(false);
 
-        
-        serverBtn.onClick.AddListener(() =>
-        {
-            NetworkManager.Singleton.StartServer(); 
-        });
 
         hostBtn.onClick.AddListener(() =>
         {
             NetworkManager.Singleton.StartHost();
             GetLocalIPAddress();
-           
-            TurtleCamera.SetActive(false);
-            MonkeyCamera.SetActive(false);
+
+
+            LionCamera.SetActive(true);
+            MainCamera.SetActive(false);
+
+            networkButtons.SetActive(false);
+
+            
+
             Debug.Log("Host started");
             numClients.Value = initial;
+            Debug.Log("Num Clients: " + numClients.Value);
+            numClientsGUI.text = numClients.Value.ToString();
         });
+
+
+
 
         clientBtn.onClick.AddListener(() =>
         {
+            numClientsGUI.text = numClients.Value.ToString();
             ipAddress = ip.text;
             SetIpAddress();
-            NetworkManager.Singleton.StartClient();
-            if(numClients.Value == 1)
-            {
-                LionCamera.SetActive(false);
-                MonkeyCamera.SetActive(false);
-                numClients.Value++;
-            }
 
-            if(numClients.Value == 2)
-            {
-                LionCamera.SetActive(false);
-                TurtleCamera.SetActive(false);
-                numClients.Value++;
-            }
+            bool temp = false;
+            temp = NetworkManager.Singleton.StartClient();
+
+
+
+            
+
+
+           // while (!temp) {}
+          //  changeCameras();
+            
+
+           Invoke("changeCameras", 1);  // THIS WORKED !!!
+            
+
+       
 
         });
     }
+
+    public void changeCameras()
+    {
+        if (numClients.Value == 1)
+        {
+
+            TurtleCamera.SetActive(true);
+            MainCamera.SetActive(false);
+            
+            updateNumClientsServerRpc();
+            Debug.Log("Num Clients: " + numClients.Value);
+            numClientsGUI.text = numClients.Value.ToString();
+
+
+        }
+
+        if (numClients.Value == 2)
+        {
+            MonkeyCamera.SetActive(true);
+            MainCamera.SetActive(false);
+            
+            updateNumClientsServerRpc();
+            Debug.Log("Num Clients: " + numClients.Value);
+            numClientsGUI.text = numClients.Value.ToString();
+        }
+
+        networkButtons.SetActive(false);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void updateNumClientsServerRpc()
+    {
+        numClients.Value = numClients.Value + 1; 
+    }
+
+    //public  override void OnNetworkSpawn()
+    //{
+
+    //    Debug.Log("onNetworkSpawn working");
+    //    if (IsClient)
+    //    {
+    //        if(numClients.Value == 1)
+    //        {
+    //            LionCamera.SetActive(false);
+    //            MonkeyCamera.SetActive(false);
+    //        }
+
+    //        if (numClients.Value == 2)
+    //        {
+    //            LionCamera.SetActive(false);
+    //            TurtleCamera.SetActive(false);
+    //        }
+    //    }
+
+    //}
 
     public string GetLocalIPAddress()
     {

@@ -2,7 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
+using TMPro;
+using System.Net;
+using System.Net.Sockets;
 
+using Unity.Netcode.Transports.UTP;
 
 
 
@@ -14,21 +18,26 @@ public class EventManager : NetworkBehaviour
     SpriteRenderer leftButtonSprite;
     SpriteRenderer rightButtonSprite;
 
+    [SerializeField] TextMeshProUGUI numberOfClients;
+
+    public NetworkManagerUI NetworkManagerUI;
+
     // Start is called before the first frame update
     void Start()
     {
 
         leftButtonSprite = leftButton.GetComponent<SpriteRenderer>();
         rightButtonSprite = rightButton.GetComponent<SpriteRenderer>();
-        leftButtonSprite.color = Color.red;
-        rightButtonSprite.color = Color.green;
+      //  leftButtonSprite.color = Color.red;
+       // rightButtonSprite.color = Color.green;
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        numberOfClients.text = NetworkManagerUI.getNumClients().ToString();
+       // Debug.Log(NetworkManagerUI.getNumClients().ToString());
     }
 
 
@@ -81,6 +90,19 @@ public class EventManager : NetworkBehaviour
         rightButtonSprite.color = Color.red;
     }
 
+    [ServerRpc(RequireOwnership = false)]
+    public void syncNetVarServerRpc()
+    {
+        numberOfClients.text = NetworkManagerUI.numClients.Value.ToString();
+        Debug.Log("Sync Net getting calledd");
+    }
+
+    [ClientRpc]
+    public void syncNetVarClientRpc()
+    {
+        numberOfClients.text = NetworkManagerUI.numClients.Value.ToString();
+        Debug.Log("Sync Net getting calledd");
+    }
 
 
 }
