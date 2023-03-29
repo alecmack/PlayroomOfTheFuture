@@ -1,0 +1,152 @@
+{
+	"steps": [
+		{
+			"type": "Initialization",
+			"deviceCount": 3,
+			"devices": [
+				{
+					"asset": "Lion",
+					"initialText": "You need 3 devices to start. Click on the Lion, Turtle, and Monkey to start this scenario!"
+				},
+				{
+					"asset": "Turtle",
+					"initialText": "You need 3 devices to start. Click on the Lion, Turtle, and Monkey to start this scenario!"
+				},
+				{
+					"asset": "Monkey",
+					"initialText": "You need 3 devices to start. Click on the Lion, Turtle, and Monkey to start this scenario!"
+				}
+			]
+		},
+		{
+			"type": "Cutscene",
+			"devices": [
+				{
+					"asset": "Lion",
+					"initialText": "The lion, monkey and turtle had a race. The lion and monkey ran very fast. The turtle ran very slow. Go to the turtle and encourage it by clapping."
+				},
+				{
+					"asset": "Turtle",
+					"initialText": "The lion, monkey and turtle had a race. The lion and monkey ran very fast. The turtle ran very slow. Go to the turtle and encourage it by clapping."
+				},
+				{
+					"asset": "Monkey",
+					"initialText": "The lion, monkey and turtle had a race. The lion and monkey ran very fast. The turtle ran very slow. Go to the turtle and encourage it by clapping."
+				}
+			]
+		},
+		{
+			"type": "Activity",
+			"correctInput": 1,
+			"devices": [
+				{
+					"asset": "Lion",
+					"initialText": "Lion: Go to the turtle and encourage it by clapping.",
+					"incorrectText": "Lion: Try again! Go to the turtle and encourage it by clapping."
+				},
+				{
+					"asset": "Turtle",
+					"initialText": "Turtle: I run very slow. I need you to clap for me to run."
+				},
+				{
+					"asset": "Monkey",
+					"initialText": "Monkey: Go to the turtle and encourage it by clapping.",
+					"incorrectText": "Monkey: Try again! Go to the turtle and encourage it by clapping."
+				}
+			]
+		},
+		{
+			"type": "Cutscene",
+			"devices": [
+				{
+					"asset": "Lion",
+					"initialText": "After the turtle was encouraged, the lion got into an accident. Go to the lion to help him!"
+				},
+				{
+					"asset": "Turtle",
+					"initialText": "After the turtle was encouraged, the lion got into an accident. Go to the lion to help him!"
+				},
+				{
+					"asset": "Monkey",
+					"initialText": "After the turtle was encouraged, the lion got into an accident. Go to the lion to help him!"
+				}
+			]
+		},
+		{
+			"type": "Activity",
+			"correctInput": 0,
+			"devices": [
+				{
+					"asset": "Lion",
+					"initialText": "Lion: I got into an accident. Please help me!"
+				},
+				{
+					"asset": "Turtle",
+					"initialText": "Turtle: Go to the lion and help him from his accident!",
+					"incorrectText": "Turtle: Try again! Go to the lion and help him from his accident!"
+				},
+				{
+					"asset": "Monkey",
+					"initialText": "Monkey: Go to the lion and help him from his accident!",
+					"incorrectText": "Monkey: Try again! Go to the lion and help him from his accident!"
+				}
+			]
+		},
+		{
+			"type": "Cutscene",
+			"devices": [
+				{
+					"asset": "Lion",
+					"initialText": "After you helped the lion from his accident, the monkey got tired. Help the monkey finish the race!"
+				},
+				{
+					"asset": "Turtle",
+					"initialText": "After you helped the lion from his accident, the monkey got tired. Help the monkey finish the race!"
+				},
+				{
+					"asset": "Monkey",
+					"initialText": "After you helped the lion from his accident, the monkey got tired. Help the monkey finish the race!"
+				}
+			]
+		},
+		{
+			"type": "Activity",
+			"correctInput": 2,
+			"devices": [
+				{
+					"asset": "Lion",
+					"initialText": "Lion: The monkey is tired. Please go help him out!",
+					"incorrectText": "Lion: Try again! The monkey is tired. Please go help him out!"
+				},
+				{
+					"asset": "Turtle",
+					"initialText": "Turtle: The monkey is tired. Please go help him out!",
+					"incorrectText": "Turtle: Try again! The monkey is tired. Please go help him out!"
+				},
+				{
+					"asset": "Monkey",
+					"initialText": "Monkey: I am so tired. Please help me finish this race!"
+				}
+			]
+		},
+		{
+			"type": "Ending",
+			"deviceCount": 3,
+			"devices": [
+				{
+					"asset": "Lion",
+					"initialText": "Lion: Congratulations! We all finished the race and are winners!"
+				},
+				{
+					"asset": "Turtle",
+					"initialText": "Turtle: Congratulations! We all finished the race and are winners!"
+				},
+				{
+					"asset": "Monkey",
+					"initialText": "Monkey: Congratulations! We all finished the race and are winners!"
+				}
+			]
+		}
+	]
+}
+
