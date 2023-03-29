@@ -45,7 +45,7 @@ public class leftButtonScript : NetworkBehaviour
         var ownCliID = OwnerClientId;
         var netObjID = NetworkObjectId;
 
-        eventManager.leftButtonClicked(ownCliID, netObjID);
+        //eventManager.leftButtonClicked(ownCliID, netObjID);
         Debug.Log(OwnerClientId);
 
         // eventManager.changeOtherColorServerRpc();

@@ -37,7 +37,7 @@ public class NetworkManagerUI : NetworkBehaviour
 
     [SerializeField] string ipAddress;
     [SerializeField] UnityTransport transport;
-   // [SerializeField] string numClientsString;
+    // [SerializeField] string numClientsString;
     [SerializeField] TextMeshProUGUI numClientsGUI;
 
     public int getNumClients()
@@ -53,28 +53,21 @@ public class NetworkManagerUI : NetworkBehaviour
         LionCamera.SetActive(false);
         MonkeyCamera.SetActive(false);
 
-
         hostBtn.onClick.AddListener(() =>
         {
             NetworkManager.Singleton.StartHost();
             GetLocalIPAddress();
-
 
             LionCamera.SetActive(true);
             MainCamera.SetActive(false);
 
             networkButtons.SetActive(false);
 
-            
-
             Debug.Log("Host started");
             numClients.Value = initial;
             Debug.Log("Num Clients: " + numClients.Value);
             numClientsGUI.text = numClients.Value.ToString();
         });
-
-
-
 
         clientBtn.onClick.AddListener(() =>
         {
@@ -85,20 +78,10 @@ public class NetworkManagerUI : NetworkBehaviour
             bool temp = false;
             temp = NetworkManager.Singleton.StartClient();
 
-
-
+            // while (!temp) {}
+            // changeCameras();
             
-
-
-           // while (!temp) {}
-          //  changeCameras();
-            
-
-           Invoke("changeCameras", 1);  // THIS WORKED !!!
-            
-
-       
-
+            Invoke("changeCameras", 1);  // THIS WORKED !!!
         });
     }
 
@@ -106,15 +89,12 @@ public class NetworkManagerUI : NetworkBehaviour
     {
         if (numClients.Value == 1)
         {
-
             TurtleCamera.SetActive(true);
             MainCamera.SetActive(false);
             
             updateNumClientsServerRpc();
             Debug.Log("Num Clients: " + numClients.Value);
             numClientsGUI.text = numClients.Value.ToString();
-
-
         }
 
         if (numClients.Value == 2)
@@ -136,27 +116,6 @@ public class NetworkManagerUI : NetworkBehaviour
         numClients.Value = numClients.Value + 1; 
     }
 
-    //public  override void OnNetworkSpawn()
-    //{
-
-    //    Debug.Log("onNetworkSpawn working");
-    //    if (IsClient)
-    //    {
-    //        if(numClients.Value == 1)
-    //        {
-    //            LionCamera.SetActive(false);
-    //            MonkeyCamera.SetActive(false);
-    //        }
-
-    //        if (numClients.Value == 2)
-    //        {
-    //            LionCamera.SetActive(false);
-    //            TurtleCamera.SetActive(false);
-    //        }
-    //    }
-
-    //}
-
     public string GetLocalIPAddress()
     {
         var host = Dns.GetHostEntry(Dns.GetHostName());
@@ -173,7 +132,7 @@ public class NetworkManagerUI : NetworkBehaviour
     }
 
     /* Sets the Ip Address of the Connection Data in Unity Transport
-   to the Ip Address which was input in the Input Field */
+     to the Ip Address which was input in the Input Field */
     // ONLY FOR CLIENT SIDE
     public void SetIpAddress()
     {

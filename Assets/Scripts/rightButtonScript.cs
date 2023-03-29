@@ -39,7 +39,7 @@ public class rightButtonScript : NetworkBehaviour
         var ownCliID = OwnerClientId;
         var netObjID = NetworkObjectId;
 
-        eventManager.rightButtonClicked(ownCliID, netObjID);
+        //eventManager.rightButtonClicked(ownCliID, netObjID);
       //  Debug.Log(OwnerClientId);
 
         //eventManager.changeOtherColorClientRpc();

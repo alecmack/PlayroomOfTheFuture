@@ -8,15 +8,15 @@ using System.Net.Sockets;
 
 using Unity.Netcode.Transports.UTP;
 
-
-
 public class EventManager : NetworkBehaviour
 {
-    public  GameObject leftButton;
-    public  GameObject rightButton;
+    public GameObject lionButton;
+    public GameObject turtleButton;
+    public GameObject monkeyButton;
 
-    SpriteRenderer leftButtonSprite;
-    SpriteRenderer rightButtonSprite;
+    SpriteRenderer lionSprite;
+    SpriteRenderer turtleSprite;
+    SpriteRenderer monkeySprite;
 
     [SerializeField] TextMeshProUGUI numberOfClients;
 
@@ -25,69 +25,75 @@ public class EventManager : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
-        leftButtonSprite = leftButton.GetComponent<SpriteRenderer>();
-        rightButtonSprite = rightButton.GetComponent<SpriteRenderer>();
-      //  leftButtonSprite.color = Color.red;
-       // rightButtonSprite.color = Color.green;
-
+        lionSprite = lionButton.GetComponent<SpriteRenderer>();
+        turtleSprite = turtleButton.GetComponent<SpriteRenderer>();
+        monkeySprite = monkeyButton.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
         numberOfClients.text = NetworkManagerUI.getNumClients().ToString();
-       // Debug.Log(NetworkManagerUI.getNumClients().ToString());
     }
 
-
-
-    public void leftButtonClicked(ulong ownCliID, ulong netObjID)
+    public void lionClicked(ulong ownCliID, ulong netObjID)
     {
-        leftButtonSprite.color = Color.red;
-        rightButtonSprite.color = Color.green;
-        changeOtherColorServerRpc(ownCliID, netObjID);
-
-
-        Debug.Log("ownerClientID: " + ownCliID + "\t networkObjectID: " + netObjID);
-
-
+        lionSprite.color = Color.red;
+        turtleSprite.color = Color.red;
+        monkeySprite.color = Color.red;
+        lionToClientRpc(ownCliID, netObjID);
     }
 
-
-    public void rightButtonClicked(ulong ownCliID, ulong netObjID)
+    public void turtleClicked(ulong ownCliID, ulong netObjID)
     {
-        leftButtonSprite.color = Color.green;
-        rightButtonSprite.color = Color.red;
-        changeOtherColorClientRpc(ownCliID, netObjID);
-
-        Debug.Log("ownerClientID: " + ownCliID + "\t networkObjectID: " + netObjID);
+        lionSprite.color = Color.green;
+        turtleSprite.color = Color.green;
+        monkeySprite.color = Color.green;
+        turtleToServerRpc(ownCliID, netObjID);
     }
 
-    [ServerRpc(RequireOwnership = false)]
-    public void changeOtherColorServerRpc(ulong ownCliID, ulong netObjID)  // Is a server RPC because it is being sent from the client to the server/host
+    public void monkeyClicked(ulong ownCliID, ulong netObjID)
     {
-        Debug.Log("Are we reaching server from client?????");
-        Debug.Log("ownerClientID: " + ownCliID + "\t networkObjectID: " + netObjID);
-
-        //otherButton = iteractWith.GetComponent<SpriteRenderer>();
-        //leftButtonSprite = leftButton.GetComponent<SpriteRenderer>();
-        leftButtonSprite.color = Color.red;
-
-        rightButtonSprite.color = Color.green;
-
+        lionSprite.color = Color.blue;
+        turtleSprite.color = Color.blue;
+        monkeySprite.color = Color.blue;
+        monkeyToServerRpc(ownCliID, netObjID);
     }
 
     [ClientRpc]
-    public void changeOtherColorClientRpc(ulong ownCliID, ulong netObjID)     // The host is both a client and a server. If a host invokes a client RPC, it triggers the on all clients, including the host
+    public void lionToClientRpc(ulong ownCliID, ulong netObjID)
     {
-        Debug.Log("Are we reaching server? this is the host");
-        Debug.Log("ownerClientID: " + ownCliID + "\t networkObjectID: " + netObjID);
-        //otherButton = leftButton.GetComponent<SpriteRenderer>();
-        //leftButtonSprite = leftButton.GetComponent<SpriteRenderer>();
-        leftButtonSprite.color = Color.green;
+        lionSprite.color = Color.red;
+        turtleSprite.color = Color.red;
+        monkeySprite.color = Color.red;
+    }
 
-        rightButtonSprite.color = Color.red;
+    [ServerRpc(RequireOwnership = false)]
+    public void turtleToServerRpc(ulong ownCliID, ulong netObjID)
+    {
+        turtleToClientRpc(ownCliID, netObjID);
+    }
+
+    [ClientRpc]
+    public void turtleToClientRpc(ulong ownCliID, ulong netObjID)
+    {
+        lionSprite.color = Color.green;
+        turtleSprite.color = Color.green;
+        monkeySprite.color = Color.green;
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void monkeyToServerRpc(ulong ownCliID, ulong netObjID)
+    {
+        monkeyToClientRpc(ownCliID, netObjID);
+    }
+
+    [ClientRpc]
+    public void monkeyToClientRpc(ulong ownCliID, ulong netObjID)
+    {
+        lionSprite.color = Color.blue;
+        turtleSprite.color = Color.blue;
+        monkeySprite.color = Color.blue;
     }
 
     [ServerRpc(RequireOwnership = false)]
