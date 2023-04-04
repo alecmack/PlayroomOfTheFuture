@@ -33,7 +33,7 @@ public class NetworkManagerUI : NetworkBehaviour
 
 
     [SerializeField] TextMeshProUGUI ipAddressText;
-    [SerializeField] TMP_InputField ip;
+    [SerializeField] TMP_InputField ipInput;
 
     [SerializeField] string ipAddress;
     [SerializeField] UnityTransport transport;
@@ -72,7 +72,7 @@ public class NetworkManagerUI : NetworkBehaviour
         clientBtn.onClick.AddListener(() =>
         {
             numClientsGUI.text = numClients.Value.ToString();
-            ipAddress = ip.text;
+            ipAddress = ipInput.text;
             SetIpAddress();
 
             bool temp = false;
@@ -123,6 +123,7 @@ public class NetworkManagerUI : NetworkBehaviour
         {
             if (ip.AddressFamily == AddressFamily.InterNetwork)
             {
+
                 ipAddressText.text = ip.ToString();
                 ipAddress = ip.ToString();
                 return ip.ToString();

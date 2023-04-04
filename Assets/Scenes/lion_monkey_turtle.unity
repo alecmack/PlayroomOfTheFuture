@@ -1328,8 +1328,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.0014057}
-  m_SizeDelta: {x: 800, y: 465.85}
+  m_AnchoredPosition: {x: 9.8924, y: 0.0014057}
+  m_SizeDelta: {x: 780.2151, y: 465.85}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &559283274
 MonoBehaviour:
@@ -1354,7 +1354,7 @@ MonoBehaviour:
     m_InternalValue: 0
   EventManager: {fileID: 0}
   ipAddressText: {fileID: 257289813}
-  ip: {fileID: 1320989516}
+  ipInput: {fileID: 0}
   ipAddress: 
   transport: {fileID: 0}
   numClientsGUI: {fileID: 1123548721}
